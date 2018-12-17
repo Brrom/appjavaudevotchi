@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceTest {
+public class UserService {
     @Autowired
     private UserRepository userRepository;
-    public User findById(Long id) {
-        if(validationId(id)){
+    public User findById(Long id) throws Exception {
+        if(userRepository.exists(id)){
             return userRepository.findById(id);
         } else {
-            throw new Exception("L'id est incorrecte");
+            throw new Exception("L'id n'existe pas");
         }
     }
 }
